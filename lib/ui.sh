@@ -99,7 +99,9 @@ print_thin_separator() { print_separator "─"; }
 
 print_header() {
     local title="$*" width="${UI_WIDTH:-70}"
-    local tl=${#title} pl=$(( (width - tl - 4) / 2 )) pr=$(( width - tl - 4 - pl ))
+    local tl=${#title}
+    local pl=$(( (width - tl - 4) / 2 ))
+    local pr=$(( width - tl - 4 - pl ))
     echo ""; print_separator "═"
     printf "${C_HEADER}║${C_RESET}"; printf "%*s" "$pl" ""
     printf "${C_BOLD}${C_BRIGHT_WHITE} %s ${C_RESET}" "${title}"
@@ -148,7 +150,9 @@ EOF
 print_progress_bar() {
     local cur="$1" tot="$2" label="${3:-}" bw=40 pct=0
     [[ "$tot" -gt 0 ]] && pct=$(( cur * 100 / tot ))
-    local filled=$(( bw * cur / tot )) empty=$(( bw - filled )) bar=""
+    local filled=$(( bw * cur / tot ))
+    local empty=$(( bw - filled ))
+    local bar=""
     for ((i=0; i<filled; i++)); do bar+="${ICO_PROGRESS_FULL}"; done
     for ((i=0; i<empty;  i++)); do bar+="${ICO_PROGRESS_EMPTY}"; done
     printf "\r  ${C_INFO}[${bar}]${C_RESET} ${C_BOLD}%3d%%${C_RESET}" "${pct}"
