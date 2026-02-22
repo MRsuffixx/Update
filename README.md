@@ -6,6 +6,50 @@
 
 A comprehensive, modular, production-ready Bash script for **Debian** and **Ubuntu** system updates and distribution upgrades.
 
+---
+
+## ⚡ One-Command Install
+
+Run this single command on your server to download and install everything:
+
+```bash
+curl -sSL https://raw.githubusercontent.com/MRsuffixx/Update/main/install.sh | sudo bash
+```
+
+### Install & Run Immediately
+
+```bash
+# Install and launch interactive mode
+curl -sSL https://raw.githubusercontent.com/MRsuffixx/Update/main/install.sh | sudo bash -s -- --run
+
+# Install and run with options
+curl -sSL https://raw.githubusercontent.com/MRsuffixx/Update/main/install.sh | sudo bash -s -- --run --lang=tr --dry-run
+
+# Install and run a quick non-interactive update
+curl -sSL https://raw.githubusercontent.com/MRsuffixx/Update/main/install.sh | sudo bash -s -- --run --update-only -y
+```
+
+After installation, use the `system-update` command directly:
+
+```bash
+sudo system-update                     # Interactive mode
+sudo system-update --dry-run           # Simulation
+sudo system-update --update-only -y    # Quick update
+sudo system-update --lang=tr           # Turkish interface
+```
+
+### Update & Uninstall
+
+```bash
+# Update to latest version
+curl -sSL https://raw.githubusercontent.com/MRsuffixx/Update/main/install.sh | sudo bash -s -- --update
+
+# Uninstall
+curl -sSL https://raw.githubusercontent.com/MRsuffixx/Update/main/install.sh | sudo bash -s -- --uninstall
+```
+
+---
+
 ## ✨ Features
 
 | Feature | Description |
@@ -17,7 +61,7 @@ A comprehensive, modular, production-ready Bash script for **Debian** and **Ubun
 | 💾 **Full Backup** | tar archive, dpkg snapshot, sources.list backup, SHA256 verification |
 | 🧹 **Deep Cleanup** | autoremove, old kernels, journal, logs, caches, orphans |
 | 🛡️ **Safety First** | Root check, SSH warning, disk space check, APT lock detection, held packages |
-| 🌐 **Multi-Language** | English (default) + Turkish |
+| 🌐 **Multi-Language** | English, Turkish, Russian, Chinese, Spanish, German |
 | 🎛️ **Interactive Menu** | Beautiful TUI with colors, spinners, progress bars, whiptail/dialog support |
 | 📝 **Full Logging** | Every action logged with timestamps |
 | 🪝 **Custom Hooks** | Pre/post update, upgrade, and reboot hook directories |
@@ -29,6 +73,7 @@ A comprehensive, modular, production-ready Bash script for **Debian** and **Ubun
 ## 📁 Project Structure
 
 ```
+install.sh         ← One-command remote installer (curl | bash)
 update.sh          ← Main entry point
 config.sh          ← All configuration defaults & version mappings
 ├── lib/
@@ -38,11 +83,15 @@ config.sh          ← All configuration defaults & version mappings
 │   ├── cleanup.sh ← Autoremove, kernels, journal, logs, caches
 │   └── upgrade.sh ← Update/upgrade/dist-upgrade logic + hooks
 └── locales/
-    ├── en.sh      ← English language strings
-    └── tr.sh      ← Turkish language strings
+    ├── en.sh      ← English (default)
+    ├── tr.sh      ← Türkçe
+    ├── ru.sh      ← Русский
+    ├── zh.sh      ← 中文 (简体)
+    ├── es.sh      ← Español
+    └── de.sh      ← Deutsch
 ```
 
-## 🚀 Quick Start
+## 🚀 Alternative: Manual Install
 
 ```bash
 # Clone the repository
@@ -59,6 +108,8 @@ sudo ./update.sh
 ## 📖 Usage
 
 ```bash
+sudo system-update [OPTIONS]
+# or if installed manually:
 sudo ./update.sh [OPTIONS]
 ```
 
@@ -66,7 +117,7 @@ sudo ./update.sh [OPTIONS]
 
 | Option | Description |
 |---|---|
-| `--lang=<code>` | Set language (`en`, `tr`) |
+| `--lang=<code>` | Set language (`en`, `tr`, `ru`, `zh`, `es`, `de`) |
 | `--dry-run` | Simulate all actions |
 | `--yes`, `-y` | Auto-confirm all prompts |
 | `--verbose`, `-v` | Enable debug output |
@@ -84,29 +135,37 @@ sudo ./update.sh [OPTIONS]
 | `--version` | Show script version |
 | `--help`, `-h` | Show help message |
 
+### 🌐 Language Examples
+
+```bash
+sudo system-update --lang=en           # English (default)
+sudo system-update --lang=tr           # Türkçe
+sudo system-update --lang=ru           # Русский
+sudo system-update --lang=zh           # 中文
+sudo system-update --lang=es           # Español
+sudo system-update --lang=de           # Deutsch
+```
+
 ### Examples
 
 ```bash
 # Interactive mode (full menu)
-sudo ./update.sh
+sudo system-update
 
 # Dry-run simulation
-sudo ./update.sh --dry-run
+sudo system-update --dry-run
 
 # Non-interactive update
-sudo ./update.sh --update-only --yes
+sudo system-update --update-only --yes
 
 # Distribution upgrade
-sudo ./update.sh --dist-upgrade
-
-# Turkish interface
-sudo ./update.sh --lang=tr
+sudo system-update --dist-upgrade
 
 # Quick cleanup, no prompts
-sudo ./update.sh --cleanup --yes
+sudo system-update --cleanup --yes
 
 # Full upgrade with auto-reboot
-sudo ./update.sh --full-upgrade --yes --auto-reboot
+sudo system-update --full-upgrade --yes --auto-reboot
 ```
 
 ## 🐧 Supported Systems
