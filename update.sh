@@ -54,7 +54,8 @@ set -euo pipefail
 # ──────────────────────────────────────────────────────────────────────────────
 # SCRIPT DIRECTORY RESOLUTION
 # ──────────────────────────────────────────────────────────────────────────────
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Resolve real directory, even if invoked via symlink
+SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")" && pwd)"
 
 # ──────────────────────────────────────────────────────────────────────────────
 # ARGUMENT PARSING (before sourcing config, so args can override)
