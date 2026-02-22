@@ -23,7 +23,8 @@ readonly SCRIPT_DATE="2026-02-22"
 # LANGUAGE / LOCALE
 # ──────────────────────────────────────────────────────────────────────────────
 # Default language for the script interface.
-# Supported values: "en" (English), "tr" (Turkish)
+# Supported values: "en" (English), "tr" (Turkish), "ru" (Russian),
+#                   "zh" (Chinese), "es" (Spanish), "de" (German)
 # Can be overridden via --lang=<code> CLI argument.
 SCRIPT_LANG="${SCRIPT_LANG:-en}"
 

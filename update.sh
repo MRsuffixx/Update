@@ -18,7 +18,7 @@
 #   sudo ./update.sh [OPTIONS]
 #
 # OPTIONS:
-#   --lang=<code>       Set language (en, tr). Default: en
+#   --lang=<code>       Set language (en, tr, ru, zh, es, de). Default: en
 #   --dry-run           Simulate all actions without making changes
 #   --yes, -y           Auto-confirm all prompts (non-interactive)
 #   --verbose, -v       Enable verbose/debug output
@@ -42,6 +42,10 @@
 #   sudo ./update.sh --update-only -y    # Non-interactive update
 #   sudo ./update.sh --dist-upgrade      # Distribution upgrade
 #   sudo ./update.sh --lang=tr           # Turkish interface
+#
+# REMOTE INSTALL:
+#   curl -sSL https://raw.githubusercontent.com/MRsuffixx/Update/main/install.sh | sudo bash
+#   curl -sSL ... | sudo bash -s -- --run  # Install and run immediately
 #   sudo ./update.sh --cleanup --yes     # Quick non-interactive cleanup
 #
 # ============================================================================
@@ -134,11 +138,16 @@ _show_help() {
     cat << 'HELP_EOF'
 Advanced System Update & Upgrade Script v2.0.0
 
+INSTALL (one command):
+  curl -sSL https://raw.githubusercontent.com/MRsuffixx/Update/main/install.sh | sudo bash
+  curl -sSL ... | sudo bash -s -- --run           # Install + run
+
 USAGE:
+  sudo system-update [OPTIONS]
   sudo ./update.sh [OPTIONS]
 
 OPTIONS:
-  --lang=<code>       Set language (en, tr). Default: en
+  --lang=<code>       Set language (en, tr, ru, zh, es, de). Default: en
   --dry-run           Simulate all actions without making changes
   --yes, -y           Auto-confirm all prompts (non-interactive)
   --verbose, -v       Enable verbose/debug output
@@ -163,6 +172,10 @@ EXAMPLES:
   sudo ./update.sh --dist-upgrade      # Distribution upgrade
   sudo ./update.sh --lang=tr           # Turkish interface
   sudo ./update.sh --cleanup --yes     # Quick non-interactive cleanup
+
+LANGUAGES:
+  en (English), tr (Türkçe), ru (Русский),
+  zh (中文), es (Español), de (Deutsch)
 
 SUPPORTED OPERATING SYSTEMS:
   - Debian 8+ (jessie through forky)
