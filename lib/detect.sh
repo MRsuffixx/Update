@@ -137,7 +137,7 @@ detect_system_info() {
         pkg_count="$(dpkg -l 2>/dev/null | grep -c '^ii')"
     fi
     if command -v apt &>/dev/null; then
-        upgradable="$(apt list --upgradable 2>/dev/null | grep -c upgradable || echo 0)"
+        upgradable="$(apt list --upgradable 2>/dev/null | grep -c upgradable || true)"
     fi
 
     # Display

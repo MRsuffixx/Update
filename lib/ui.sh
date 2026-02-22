@@ -84,7 +84,7 @@ print_dry_run()  { echo -e "${C_DRY_RUN}${MSG_DRY_RUN_PREFIX} $*${C_RESET}"; _lo
 
 print_kv() {
     local label="$1" value="$2" indent="${3:-  }"
-    printf "%b%s%-25s%b %b%s%b\n" "${indent}" "${C_LABEL}" "${label}:" "${C_RESET}" "${C_VALUE}" "${value}" "${C_RESET}"
+    printf "%b%b%-25s%b %b%s%b\n" "${indent}" "${C_LABEL}" "${label}:" "${C_RESET}" "${C_VALUE}" "${value}" "${C_RESET}"
 }
 
 # ──────────────────────────────────────────────────────────────────────────────
