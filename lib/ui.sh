@@ -150,7 +150,8 @@ EOF
 print_progress_bar() {
     local cur="$1" tot="$2" label="${3:-}" bw=40 pct=0
     [[ "$tot" -gt 0 ]] && pct=$(( cur * 100 / tot ))
-    local filled=$(( bw * cur / tot ))
+    local filled=0
+    [[ "$tot" -gt 0 ]] && filled=$(( bw * cur / tot ))
     local empty=$(( bw - filled ))
     local bar=""
     for ((i=0; i<filled; i++)); do bar+="${ICO_PROGRESS_FULL}"; done

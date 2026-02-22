@@ -408,7 +408,11 @@ main() {
         echo ""
         _step "Launching Advanced System Updater..."
         echo ""
-        exec "${OPT_INSTALL_DIR}/update.sh" "${OPT_RUN_ARGS[@]}"
+        if [[ ${#OPT_RUN_ARGS[@]} -gt 0 ]]; then
+            exec "${OPT_INSTALL_DIR}/update.sh" "${OPT_RUN_ARGS[@]}"
+        else
+            exec "${OPT_INSTALL_DIR}/update.sh"
+        fi
     fi
 }
 

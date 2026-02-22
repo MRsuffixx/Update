@@ -421,8 +421,12 @@ _upgrade_ubuntu() {
             # Use -d flag if upgrading to a development release
             # (usually not needed for LTS→LTS)
 
-            print_info "Running: do-release-upgrade ${dru_args[*]}"
-            do-release-upgrade "${dru_args[@]}" 2>&1 | tee -a "${LOG_FILE}"
+            print_info "Running: do-release-upgrade ${dru_args[*]:-}"
+            if [[ ${#dru_args[@]} -gt 0 ]]; then
+                do-release-upgrade "${dru_args[@]}" 2>&1 | tee -a "${LOG_FILE}"
+            else
+                do-release-upgrade 2>&1 | tee -a "${LOG_FILE}"
+            fi
             local rc=${PIPESTATUS[0]}
 
             if [[ ${rc} -ne 0 ]]; then

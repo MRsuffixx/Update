@@ -49,7 +49,7 @@ perform_cleanup() {
     # Calculate freed space
     local space_after
     space_after="$(df -BM / | awk 'NR==2{gsub(/M/,"",$4); print $4}')"
-    local freed=$(( space_after - space_before ))
+    local freed=$(( ${space_after:-0} - ${space_before:-0} ))
 
     print_separator "═"
     print_success "${MSG_CLEANUP_SUCCESS}"

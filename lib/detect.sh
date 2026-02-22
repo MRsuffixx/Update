@@ -69,6 +69,7 @@ check_supported_os() {
     case "${DETECTED_OS}" in
         debian)
             local ver_int="${DETECTED_VERSION%%.*}"
+            ver_int="${ver_int:-0}"
             if [[ "${ver_int}" -lt "${DEBIAN_MIN_SUPPORTED}" ]]; then
                 print_error "${MSG_OS_VERSION_TOO_OLD}"
                 print_info "Minimum: Debian ${DEBIAN_MIN_SUPPORTED}"
@@ -84,6 +85,7 @@ check_supported_os() {
             ;;
         ubuntu)
             local major="${DETECTED_VERSION%%.*}"
+            major="${major:-0}"
             if [[ "${major}" -lt "${UBUNTU_MIN_SUPPORTED%%.*}" ]]; then
                 print_error "${MSG_OS_VERSION_TOO_OLD}"
                 print_info "Minimum: Ubuntu ${UBUNTU_MIN_SUPPORTED}"
@@ -210,6 +212,7 @@ check_disk_space() {
 
     local free_mb
     free_mb="$(df -BM / 2>/dev/null | awk 'NR==2{gsub(/M/,"",$4); print $4}')"
+    free_mb="${free_mb:-0}"
     AVAILABLE_DISK_MB="${free_mb}"
 
     if [[ "${free_mb}" -lt "${MIN_DISK_SPACE_MB}" ]]; then
